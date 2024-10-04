@@ -1,0 +1,238 @@
+/* navbar */
+
+.navbar {
+  position: sticky;
+}
+
+.navbar-color {
+  background-color: #04A7C8
+}
+
+.gluten-font {
+  font-family: "Gluten", cursive;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-size: 2.2rem;
+  font-variation-settings:
+    "slnt" 0;
+}
+
+.nunito-font {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+.custom-dropdown-menu {
+  background-color: white !important;
+
+
+}
+
+.custom-dropdown-menu a.dropdown-item {
+  color: #0392af;
+}
+
+.custom-dropdown-menu {
+  background-color: #04A7C8;
+  color: #04A7C8 !important;
+}
+
+.custom-dropdown-menu .dropdown-divider {
+  border-color: #0392af;
+
+}
+
+/*home*/
+
+.background-image {
+  width: 100vw;
+  height: 100vh;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hello-human {
+  font-size: 9rem;
+  padding-left: 4rem;
+  line-height: 1.2;
+}
+
+.cat-image {
+  width: 50rem;
+  height: auto;
+}
+
+.text-link {
+  color: #ffffff;
+
+  text-decoration: underline;
+
+}
+
+.text-link:hover {
+  color: #FFCA8A;
+
+}
+
+/* login */
+.login-container {
+  width: calc(100% - 12px);
+  height: calc(100vh - 91px);
+}
+
+.blue-background {
+  background: linear-gradient(to right, #04A7C8, white);
+}
+
+.white-background {
+  background-color: #FFFFFF;
+}
+
+.login-title {
+  font-family: "Afacad Flux", sans-serif;
+  color: #04A7C8;
+  position: relative;
+  margin-top: 7.5rem;
+}
+
+.underline {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #04A7C8;
+  margin-top: 10px;
+}
+
+.afacad-flux {
+  font-family: "Afacad Flux", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
+
+.custom-input {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.custom-input::placeholder {
+  font-family: "Afacad Flux", sans-serif;
+  font-size: 1rem;
+}
+
+.custom-input:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: #04A7C8;
+}
+
+.button-login {
+  background-color: white !important;
+  border: 1px solid #04A7C8 !important;
+  color: #04A7C8 !important;
+}
+
+.button-login:hover {
+  background-color: #04A7C8 !important;
+  border: 1px solid #04A7C8 !important;
+  color: white !important;
+}
+
+.signup-link {
+  color: #04A7C8;
+}
+
+.signup-link:hover {
+  color: #02758b;
+}
+
+.dog-picture {
+  object-fit: contain;
+  width: 13rem;
+  margin-top: 4rem;
+}
+
+/* signup  */
+
+#gender-dropdown {
+  width: 100%;
+  background-color: white !important;
+  color: #04A7C8;
+  border: 1px solid #04A7C8 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-menu.show {
+  width: 100%;
+}
+
+.custom-date-input {
+  color: #333;
+  border: 1px solid #04A7C8;
+
+}
+
+.custom-date-input:focus {
+  background-color: #e6f7ff;
+  color: #333;
+  border-color: #04A7C8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsività */
+@media (max-width: 768px) {
+  .cat-image {
+    width: 30rem;
+    top: 50%;
+  }
+
+  .hello-human {
+    font-size: 5rem;
+  }
+
+  .blue-background {
+    height: 0;
+  }
+
+  .login-title {
+    margin-top: 2rem;
+  }
+
+  .dog-picture {
+    margin-top: 5rem;
+  }
+
+
+}

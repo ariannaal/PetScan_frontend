@@ -172,6 +172,11 @@
   margin-top: 4rem;
 }
 
+.error-message {
+  color: rgb(231, 0, 0);
+  margin-top: 20px;
+}
+
 /* signup  */
 
 #gender-dropdown {

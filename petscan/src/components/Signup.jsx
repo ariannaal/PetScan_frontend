@@ -1,21 +1,56 @@
 import { Button, Col, Form, InputGroup, Row, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Signup = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleSignup = () => {
-        navigate('');
+    const handleSignup = async () => {
+
+        const model = {
+            name,
+            surname,
+            gender,
+            dateOfBirth: birthDate,
+            email,
+            password,
+        }
+
+        console.log(model);
+
+        try {
+            const response = await fetch('http://localhost:3001/auth/register', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+                body: JSON.stringify(model),
+
+            });
+            if (!response.ok) {
+                throw new Error('Registrazione fallita');
+            }
+            const data = await response.json();
+            console.log('Registazione avvenuta con successo: ', data);
+        } catch (error) {
+            console.error('Errore nella registrazione: ', error);
+        }
     };
 
     const handleSelect = (selectedGender) => {
         setGender(selectedGender);
     };
+
 
     return (
         <>
@@ -41,6 +76,8 @@ const Signup = () => {
                                         type="text"
                                         placeholder="Nome"
                                         className="custom-input"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
                                     />
                                 </Form.Group>
 
@@ -50,6 +87,8 @@ const Signup = () => {
                                         type="text"
                                         placeholder="Cognome"
                                         className="custom-input"
+                                        value={surname}
+                                        onChange={(e) => setSurname(e.target.value)}
                                     />
                                 </Form.Group>
 
@@ -59,8 +98,8 @@ const Signup = () => {
                                     onSelect={handleSelect}
                                     className="mt-4"
                                 >
-                                    <Dropdown.Item className='gender-dropdown' eventKey="Femmina">Femmina</Dropdown.Item>
-                                    <Dropdown.Item className='gender-dropdown' eventKey="Maschio">Maschio</Dropdown.Item>
+                                    <Dropdown.Item className='gender-dropdown' eventKey="FEMALE">Femmina</Dropdown.Item>
+                                    <Dropdown.Item className='gender-dropdown' eventKey="MALE">Maschio</Dropdown.Item>
                                 </DropdownButton>
 
                                 <Form.Group className="mb-3 mt-4">
@@ -72,6 +111,7 @@ const Signup = () => {
                                         value={birthDate}
                                         onChange={(e) => setBirthDate(e.target.value)}
                                         className='mt-1 custom-date-input custom-input'
+
                                     />
                                 </Form.Group>
 
@@ -81,6 +121,8 @@ const Signup = () => {
                                         placeholder="Email"
                                         required
                                         className="custom-input"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </InputGroup>
 
@@ -90,6 +132,8 @@ const Signup = () => {
                                         placeholder="Password"
                                         required
                                         className="custom-input"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </InputGroup>
 

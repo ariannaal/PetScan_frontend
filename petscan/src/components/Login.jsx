@@ -34,8 +34,8 @@ const Login = () => {
             }
 
             const data = await response.json();
-            console.log('Login avvenuto con successo: ', data);
-            navigate('/');
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate('/bloodTests');
 
         } catch (error) {
             console.error('Errore nel login: ', error);

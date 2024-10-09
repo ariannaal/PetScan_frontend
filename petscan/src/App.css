@@ -54,7 +54,7 @@
 
 }
 
-.imag e-container {
+.image-container {
   position: relative;
   width: 100%;
   height: auto;
@@ -79,7 +79,7 @@
 }
 
 .cat-image {
-  width: 48rem;
+  width: 35rem;
 
   height: auto;
 }
@@ -213,6 +213,37 @@
   width: 20rem;
 } */
 
+/* risultati */
+
+.title-result {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #04A7C8;
+}
+
+.scrollable-container {
+  max-height: calc(100% - 56px - 48px - 48px - 75px);
+  overflow-x: hidden;
+
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #04A7C8;
+  border-radius: 4px;
+}
+
+
+
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+
 
 
 
@@ -245,6 +276,14 @@
 
   .dog-picture {
     margin-top: 5rem;
+  }
+
+  .title-result {
+    font-size: 1rem;
+  }
+
+  .text-result {
+    font-size: 0.8rem;
   }
 
 

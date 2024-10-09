@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const BloodTestInfo = () => {
 
@@ -9,6 +10,9 @@ const BloodTestInfo = () => {
     const [pets, setPets] = useState([]);
     const [selectedPetId, setSelectedPetId] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchPets();
@@ -23,8 +27,10 @@ const BloodTestInfo = () => {
 
             const response = await fetch(`http://localhost:3001/pets`, {
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${accessToken}`,
                 },
+
             });
 
             if (!response.ok) {
@@ -34,6 +40,7 @@ const BloodTestInfo = () => {
             const data = await response.json();
             console.log('Animali trovati:', data);
             setPets(data);
+
 
         } catch (error) {
             console.error('Errore nel trovare gli animali:', error);
@@ -49,7 +56,6 @@ const BloodTestInfo = () => {
             petType,
             testNumber,
             petId: selectedPetId,
-
         };
 
         try {
@@ -60,7 +66,15 @@ const BloodTestInfo = () => {
                     authorization: `Bearer ${localStorage.getItem("accessToken")}`
                 },
                 body: JSON.stringify(bloodTest),
+
             });
+
+            const data = await response.json();
+            console.log("Dati dell'esame del sangue:", data);
+
+            const bloodTestId = data.id;
+
+            navigate(`/results?bloodTestId=${bloodTestId}`);
 
             if (!response.ok) {
                 throw new Error('Errore nell\'inserimento del test del sangue');

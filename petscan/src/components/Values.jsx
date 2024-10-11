@@ -4,14 +4,10 @@ import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import DownloadPDF from "./DownloadPDF";
 import { Modal } from "react-bootstrap";
-import Disease from "./Disease";
-import { Button } from "bootstrap/dist/js/bootstrap.bundle.min";
 
 
 const Values = () => {
     const { bloodTestId } = useParams();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [results, setResults] = useState([]);
     const [ownerName, setOwnerName] = useState('');
     const [surname, setSurname] = useState('');
@@ -24,10 +20,8 @@ const Values = () => {
     const [age, setAge] = useState('');
     const [symptoms, setSymptoms] = useState([]);
 
-    console.log("bloodTestId:", bloodTestId);
-
     const [show, setShow] = useState(false);
-    const [selectedCondition, setSelectedCondition] = useState(null); // stato per la malattia selezionata
+    const [selectedCondition, setSelectedCondition] = useState(null);
 
     const handleClose = () => setShow(false);
 
@@ -76,9 +70,6 @@ const Values = () => {
                 }
             } catch (error) {
                 console.error('Errore durante il recupero dei risultati:', error);
-                setError(error);
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -100,19 +91,15 @@ const Values = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-
-            setSymptoms(data.symptoms || []);
+            setSymptoms(data.symptomDescription || []);
         } catch (error) {
             console.error('Errore durante il recupero dei sintomi:', error);
         }
     };
 
-
     return (
         <div className="values-container container">
             <h1 className="text-center mt-5 mb-5 login-title">Risultati degli esami</h1>
-
-            {/* <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} /> */}
 
             <Row>
                 <Col xs={6}>
@@ -143,32 +130,23 @@ const Values = () => {
                         <Col className="ps-5">
                             <div className="d-flex justify-content-between">
                                 <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
-
-                                <div style={{ marginTop: '-10px' }}>
-                                    <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
-                                </div>
+                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
                             </div>
 
                             {(() => {
-                                // per tenere traccia delle patologie uniche
-                                const uniqueConditions = new Set(); // set per gestire le patologie uniche
+                                const uniqueConditions = new Set();
 
-                                console.log(results);
-
-                                // mappo per estrarre le patologie
                                 return results.map(result => {
                                     const conditions = result.pathologicalConditions;
 
                                     return conditions.map(condition => {
                                         const conditionName = condition.name;
 
-
                                         if (!uniqueConditions.has(conditionName)) {
                                             uniqueConditions.add(conditionName);
                                             return (
                                                 <div key={condition.id} className="div-disease">
                                                     <div
-
                                                         className="text-result disease-link"
                                                         onClick={() => handleShow(condition)}
                                                     >
@@ -191,31 +169,27 @@ const Values = () => {
             </Row>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className="disease-title">
                     <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedCondition ? (
                         <>
                             <p>{selectedCondition.description || "Descrizione non disponibile."}</p>
-                            <h6>Sintomi:</h6>
+                            <h6 className="disease-title fs-5">Sintomi:</h6>
                             {symptoms.length > 0 ? (
-                                <ul>
+                                <ul >
                                     {symptoms.map((symptom, index) => (
-                                        <li key={index}>{symptom.symptomDescription}</li>
+                                        <li className="disease-symptoms" key={index}>{symptom}</li>
                                     ))}
                                 </ul>
                             ) : (
                                 <p>Nessun sintomo disponibile.</p>
                             )}
                         </>
-                    ) : (
-                        <p>Nessuna informazione disponibile.</p>
-                    )}
+                    ) : null}
                 </Modal.Body>
-
             </Modal>
-
         </div>
     );
 };

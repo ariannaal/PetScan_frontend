@@ -255,6 +255,13 @@
   line-height: 30px;
 }
 
+.disease-title {
+  color: #04A7C8;
+}
+
+.disease-symptoms {
+  cursor: pointer !important;
+}
 
 
 

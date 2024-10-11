@@ -236,12 +236,32 @@
   border-radius: 4px;
 }
 
+.download-pdf {
+  height: 3rem;
+}
+
+.div-disease {
+  margin-bottom: 8px;
+}
+
+.disease-link:hover {
+  color: #04A7C8 !important;
+}
+
+/* malattie */
+
+.disease-description {
+  font-size: large;
+  line-height: 30px;
+}
 
 
-body {
+
+
+/* body {
   overflow: hidden;
   height: 100%;
-}
+} */
 
 
 

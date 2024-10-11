@@ -10,6 +10,7 @@ import Signup from './components/Signup';
 import BloodTestInfo from './components/BloodTestInfo';
 import BloodTest from './components/BloodTest';
 import Values from './components/Values';
+import Disease from './components/Disease';
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             <Route path="/bloodTests" element={<BloodTestInfo />} />
             <Route path="/results" element={<BloodTest />} />
             <Route path="/results/:bloodTestId/values" element={<Values />} />
-
+            <Route path="/disease/:diseaseId" element={<Disease />} />
 
           </Routes>
         </div>

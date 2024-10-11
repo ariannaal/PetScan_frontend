@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import DownloadPDF from "./DownloadPDF";
+import { Modal } from "react-bootstrap";
+import Disease from "./Disease";
+import { Button } from "bootstrap/dist/js/bootstrap.bundle.min";
 
 
 const Values = () => {
@@ -19,15 +22,20 @@ const Values = () => {
     const [petType, setPetType] = useState('');
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');
-
-
-
+    const [symptoms, setSymptoms] = useState([]);
 
     console.log("bloodTestId:", bloodTestId);
 
+    const [show, setShow] = useState(false);
+    const [selectedCondition, setSelectedCondition] = useState(null); // stato per la malattia selezionata
 
+    const handleClose = () => setShow(false);
 
-
+    const handleShow = (condition) => {
+        setSelectedCondition(condition);
+        fetchSymptoms(condition.id);
+        setShow(true);
+    };
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -46,9 +54,6 @@ const Values = () => {
                 }
 
                 const data = await response.json();
-                console.log("Dati ricevuti:", data);
-
-
                 if (data.results && Array.isArray(data.results)) {
                     setResults(data.results);
                     setOwnerName(data.ownerName || '');
@@ -60,6 +65,11 @@ const Values = () => {
                     setGender(data.gender || '');
                     setBreed(data.breed || '');
                     setAge(data.age || '');
+
+                    if (data.results.length > 0 && data.results[0].pathologicalConditions.length > 0) {
+                        const firstCondition = data.results[0].pathologicalConditions[0];
+                        fetchSymptoms(firstCondition.id);
+                    }
                 } else {
                     console.error('I risultati non sono disponibili o non sono un array:', data);
                     setResults([]);
@@ -77,16 +87,34 @@ const Values = () => {
         }
     }, [bloodTestId]);
 
+    const fetchSymptoms = async (diseaseId) => {
+        try {
+            const response = await fetch(`http://localhost:3001/symptoms/disease/${diseaseId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+
+            setSymptoms(data.symptoms || []);
+        } catch (error) {
+            console.error('Errore durante il recupero dei sintomi:', error);
+        }
+    };
 
 
     return (
-        <div className="values-container container" >
+        <div className="values-container container">
             <h1 className="text-center mt-5 mb-5 login-title">Risultati degli esami</h1>
 
-            <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
+            {/* <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} /> */}
 
             <Row>
-
                 <Col xs={6}>
                     <Row className="mb-3">
                         <Col xs={6} className="title-result">Parametro</Col>
@@ -107,52 +135,88 @@ const Values = () => {
                         ) : (
                             <div>Nessun risultato disponibile.</div>
                         )}
-
-
                     </div>
                 </Col>
 
                 <Col xs={6}>
                     <Row className="mb-4">
                         <Col className="ps-5">
-                            <h5 className="title-result mb-4">Possibile quadro patologico:</h5>
+                            <div className="d-flex justify-content-between">
+                                <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
+
+                                <div style={{ marginTop: '-10px' }}>
+                                    <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
+                                </div>
+                            </div>
+
                             {(() => {
                                 // per tenere traccia delle patologie uniche
-                                const uniqueConditions = {};
+                                const uniqueConditions = new Set(); // set per gestire le patologie uniche
+
+                                console.log(results);
 
                                 // mappo per estrarre le patologie
                                 return results.map(result => {
-                                    const condition = result.pathologicalCondition;
+                                    const conditions = result.pathologicalConditions;
 
-                                    if (condition) {
-                                        const conditionName = condition.split(" (")[0];
+                                    return conditions.map(condition => {
+                                        const conditionName = condition.name;
 
-                                        // controllo se la patologia e' gia stata aggiunta
-                                        if (!uniqueConditions[conditionName]) {
-                                            uniqueConditions[conditionName] = true; // se no la aggiungo all'oggetto
+
+                                        if (!uniqueConditions.has(conditionName)) {
+                                            uniqueConditions.add(conditionName);
                                             return (
+                                                <div key={condition.id} className="div-disease">
+                                                    <div
 
-                                                <p className="my-2" key={conditionName}>
-                                                    {conditionName.charAt(0).toUpperCase() + conditionName.slice(1)}
-                                                </p>
+                                                        className="text-result disease-link"
+                                                        onClick={() => handleShow(condition)}
+                                                    >
+                                                        {conditionName.charAt(0).toUpperCase() + conditionName.slice(1)}
+                                                    </div>
+                                                </div>
                                             );
                                         }
-                                    }
-                                    return null;
-                                }).filter(Boolean);
+                                        return null;
+                                    }).filter(Boolean);
+                                }).flat();
                             })()}
 
-                            {results.every(result => !result.pathologicalCondition) && (
+                            {results.every(result => result.pathologicalConditions.length === 0) && (
                                 <p>Nessuna condizione patologica trovata.</p>
                             )}
                         </Col>
                     </Row>
                 </Col>
-
             </Row>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedCondition ? (
+                        <>
+                            <p>{selectedCondition.description || "Descrizione non disponibile."}</p>
+                            <h6>Sintomi:</h6>
+                            {symptoms.length > 0 ? (
+                                <ul>
+                                    {symptoms.map((symptom, index) => (
+                                        <li key={index}>{symptom.symptomDescription}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>Nessun sintomo disponibile.</p>
+                            )}
+                        </>
+                    ) : (
+                        <p>Nessuna informazione disponibile.</p>
+                    )}
+                </Modal.Body>
+
+            </Modal>
+
         </div>
-
-
     );
 };
 

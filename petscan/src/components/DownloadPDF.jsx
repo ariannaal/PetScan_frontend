@@ -2,6 +2,7 @@ import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
 import PropTypes from 'prop-types';
 import logo from '../assets/images/logo-blue.png';
+import downloadIcon from '../assets/images/file-pdf-solid.svg';
 
 const DownloadPDF = ({ results, ownerName, surname, petName, petType, age, gender, breed, dateOfTest, testNumber }) => {
     const downloadPDF = () => {
@@ -90,9 +91,14 @@ const DownloadPDF = ({ results, ownerName, surname, petName, petType, age, gende
     };
 
     return (
-        <button onClick={downloadPDF} className="btn btn-primary mt-3">
-            Scarica PDF
-        </button>
+
+        <img
+            src={downloadIcon}
+            alt="Scarica PDF"
+            className="btn download-pdf mt-3"
+            style={{ cursor: 'pointer' }}
+            onClick={downloadPDF}
+        />
     );
 };
 
@@ -102,11 +108,11 @@ DownloadPDF.propTypes = {
     surname: PropTypes.string.isRequired,
     petName: PropTypes.string.isRequired,
     petType: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
+    age: PropTypes.string.isRequired,
     gender: PropTypes.string.isRequired,
     breed: PropTypes.string.isRequired,
     dateOfTest: PropTypes.string.isRequired,
-    testNumber: PropTypes.number.isRequired
+    testNumber: PropTypes.string.isRequired,
 };
 
 export default DownloadPDF;

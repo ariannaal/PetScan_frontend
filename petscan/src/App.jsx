@@ -11,6 +11,11 @@ import BloodTestInfo from './components/BloodTestInfo';
 import BloodTest from './components/BloodTest';
 import Values from './components/Values';
 import Disease from './components/Disease';
+import UserOptions from './components/UserOptions';
+import AddPet from './components/AddPet';
+import Pets from './components/Pets';
+import PetsBloodTests from './components/PetsBloodTests';
+import SelectedBloodTestResults from './components/SelectedBloodTestResults';
 
 
 function App() {
@@ -18,19 +23,24 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div>
-          <MyNavbar className="text-center" />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Signup />} />
-            <Route path="/bloodTests" element={<BloodTestInfo />} />
-            <Route path="/results" element={<BloodTest />} />
-            <Route path="/results/:bloodTestId/values" element={<Values />} />
-            <Route path="/disease/:diseaseId" element={<Disease />} />
 
-          </Routes>
-        </div>
+        <MyNavbar className="text-center" />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Signup />} />
+          <Route path="/bloodTests" element={<BloodTestInfo />} />
+          <Route path="/results" element={<BloodTest />} />
+          <Route path="/results/:bloodTestId/values" element={<Values />} />
+          <Route path="/disease/:diseaseId" element={<Disease />} />
+          <Route path="/options" element={<UserOptions
+          />} />
+          <Route path="/add-pet" element={<AddPet />} />
+          <Route path="/pets" element={<Pets />} />
+          <Route path="/bloodTests/:petId" element={<PetsBloodTests />} />
+          <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
+        </Routes>
+
       </BrowserRouter>
     </>
   )

@@ -1,27 +1,24 @@
+import { useEffect, useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { Row, Col, Modal } from 'react-bootstrap';
+import DownloadPDF from './DownloadPDF';
 
-import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import DownloadPDF from "./DownloadPDF";
-import { Modal } from "react-bootstrap";
-
-
-const Values = () => {
+const SelectedBloodTestResults = () => {
     const { bloodTestId } = useParams();
+    const { state } = useLocation();
+    const { petName } = state || {};
     const [results, setResults] = useState([]);
     const [ownerName, setOwnerName] = useState('');
     const [surname, setSurname] = useState('');
-    const [testNumber, setTestNumber] = useState('');
-    const [dateOfTest, setDateOfTest] = useState('');
-    const [petName, setPetName] = useState('');
     const [gender, setGender] = useState('');
     const [petType, setPetType] = useState('');
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');
     const [symptoms, setSymptoms] = useState([]);
-
     const [show, setShow] = useState(false);
     const [selectedCondition, setSelectedCondition] = useState(null);
+    const [testNumber, setTestNumber] = useState('');
+    const [dateOfTest, setDateOfTest] = useState('');
 
     const handleClose = () => setShow(false);
 
@@ -34,8 +31,7 @@ const Values = () => {
     useEffect(() => {
         const fetchResults = async () => {
             try {
-                const url = `http://localhost:3001/results/${bloodTestId}/values`;
-                const response = await fetch(url, {
+                const response = await fetch(`http://localhost:3001/results/${bloodTestId}/values`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -48,24 +44,24 @@ const Values = () => {
                 }
 
                 const data = await response.json();
+                console.log("data", data);
                 if (data.results && Array.isArray(data.results)) {
                     setResults(data.results);
                     setOwnerName(data.ownerName || '');
                     setSurname(data.surname || '');
                     setPetType(data.petType || '');
-                    setTestNumber(data.testNumber || '');
-                    setDateOfTest(data.dateOfTest || '');
-                    setPetName(data.petName || '');
                     setGender(data.gender || '');
                     setBreed(data.breed || '');
                     setAge(data.age || '');
+                    setTestNumber(data.testNumber || '');
+                    setDateOfTest(data.dateOfTest || '');
 
                     if (data.results.length > 0 && data.results[0].pathologicalConditions.length > 0) {
                         const firstCondition = data.results[0].pathologicalConditions[0];
                         fetchSymptoms(firstCondition.id);
                     }
                 } else {
-                    console.error('I risultati non sono disponibili', data);
+                    console.error('I risultati non sono disponibili:', data);
                     setResults([]);
                 }
             } catch (error) {
@@ -103,9 +99,12 @@ const Values = () => {
 
     return (
         <div className="values-container container">
-            <h1 className="text-center mt-5 mb-5 login-title">Risultati degli esami</h1>
+            <h1 className="text-center mt-5 mb-5 login-title">Risultato dell&apos;esame di {petName}</h1>
+            <p><strong>Numero dell&apos;esame:</strong> {testNumber}</p>
+            <p><strong>Data dell&apos;esame:</strong> {dateOfTest}</p>
 
-            <Row>
+
+            <Row className="mt-5">
                 <Col xs={6} className='no-scroll'>
                     <Row className="mb-3">
                         <Col xs={6} className="title-result">Parametro</Col>
@@ -133,7 +132,7 @@ const Values = () => {
                         <Col className="ps-5">
                             <div className="d-flex justify-content-between">
                                 <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
-                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
+                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} petName={petName} petType={petType} age={age} gender={gender} breed={breed} dateOfTest={dateOfTest} testNumber={testNumber} />
                             </div>
 
                             {(() => {
@@ -181,7 +180,7 @@ const Values = () => {
                             <p>{selectedCondition.description || "Descrizione non disponibile."}</p>
                             <h6 className="disease-title fs-5">Sintomi:</h6>
                             {symptoms.length > 0 ? (
-                                <ul >
+                                <ul>
                                     {symptoms.map((symptom, index) => (
                                         <li className="disease-symptoms" key={index}>{symptom}</li>
                                     ))}
@@ -197,4 +196,4 @@ const Values = () => {
     );
 };
 
-export default Values;
+export default SelectedBloodTestResults;

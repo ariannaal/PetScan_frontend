@@ -8,6 +8,10 @@ const DownloadPDF = ({ results, ownerName, surname, petName, petType, age, gende
     const downloadPDF = () => {
         const doc = new jsPDF();
 
+        const formatString = (str) => {
+            return str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, ' ');
+        };
+
         doc.addImage(logo, 'PNG', 10, 5, 25, 25);
 
 
@@ -74,7 +78,7 @@ const DownloadPDF = ({ results, ownerName, surname, petName, petType, age, gende
         autoTable(doc, {
             head: [['Parametro', 'Valore']],
             body: results.map(result => [
-                { content: result.valueName || 'N/A', styles: { fontStyle: 'bold' } },
+                { content: formatString(result.valueName) || 'N/A', styles: { fontStyle: 'bold' } },
                 `${result.value !== undefined ? result.value : 'N/A'} ${result.unit || ''}`
             ]),
             startY: 85, // per spostare la tabella in basso

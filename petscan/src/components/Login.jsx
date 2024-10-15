@@ -35,7 +35,8 @@ const Login = () => {
 
             const data = await response.json();
             localStorage.setItem('accessToken', data.accessToken);
-            navigate('/bloodTests');
+            localStorage.setItem('firstName', data.firstName);
+            navigate('/options');
 
         } catch (error) {
             console.error('Errore nel login: ', error);

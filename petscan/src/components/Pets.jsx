@@ -70,8 +70,8 @@ const Pets = () => {
                             <p><strong>Genere:</strong> {pet.gender === 'MALE' ? 'Maschio' : pet.gender === 'FEMALE' ? 'Femmina' : pet.gender}</p>
                             <p><strong>Età:</strong> {pet.age}</p>
                             <p><strong>Data di Nascita:</strong> {pet.dateOfBirth}</p><div className='d-flex align-column'>
-                                <Button className='button-login mt-5 rounded-pill px-4'>Modifica animale</Button>
-                                <Button className='button-login mt-5 rounded-pill px-4 ms-3' onClick={() => navigate(`/bloodTests/${pet.id}`, { state: { petName: pet.name } })}>Visualizza esami</Button>
+                                <Button className='button-login mt-5 rounded-pill px-4 ms-3' onClick={() => navigate(`/bloodTests/${pet.id}`, { state: { petName: pet.name } })}>Visualizza gli esami di {pet.name}</Button>
+                                <Button className='button-login mt-5 rounded-pill px-4 ms-3' onClick={() => navigate(`/pets/${pet.id}`, { state: { petName: pet.name } })}>Modifica i dati di {pet.name} </Button>
                             </div>
 
                         </div>

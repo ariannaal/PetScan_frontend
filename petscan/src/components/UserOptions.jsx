@@ -14,7 +14,7 @@ const UserOptions = () => {
 
     return (
 
-        <Container className="d-flex justify-content-center align-items-center">
+        <Container className="d-flex justify-content-center align-items-center mt-5">
             <Row className="w-100">
                 <div className="form-container d-flex flex-column align-items-center justify-content-center my-5">
 
@@ -53,25 +53,25 @@ const UserOptions = () => {
                 <Col xs={12} sm={6} lg={4} className="mb-4">
                     <Card className="h-100 text-center">
                         <Card.Body>
-                            <Card.Title className="card-title">Modifica i dati di un animale</Card.Title>
-                            <Card.Text className="card-booptiondy">
-                                Aggiorna le informazioni di un animale già registrato nel tuo profilo.
+                            <Card.Title className="card-title">Visualizza i tuoi animali</Card.Title>
+                            <Card.Text className="card-option">
+                                Visualizza le informazioni degli animali registrati nel tuo profilo, visualizza gli esami o modifica i dati.
                             </Card.Text>
                             <Button className='button-login my-3 rounded-pill px-4' onClick={() => handleNavigate('/pets')}>
-                                Modifica dati animale
+                                Visualizza gli animali
                             </Button>
                         </Card.Body>
                     </Card>
                 </Col>
 
-                <Col xs={12} sm={6} lg={4} className="mb-4">
+                {/* <Col xs={12} sm={6} lg={4} className="mb-4">
                     <Card className="h-100 text-center">
                         <Card.Body>
                             <Card.Title className="card-title">Visualizza esami precedenti</Card.Title>
                             <Card.Text className="card-option">
                                 Consulta gli esami del sangue precedenti dei tuoi animali.
                             </Card.Text>
-                            <Button className='button-login my-3 rounded-pill px-4' onClick={() => handleNavigate('/pets')}>
+                            <Button className='button-login my-3 rounded-pill px-4' onClick={() => handleNavigate('/pets', { state: { action: 'view' } })}>
                                 Visualizza esami
                             </Button>
                         </Card.Body>
@@ -104,7 +104,7 @@ const UserOptions = () => {
                             </Button>
                         </Card.Body>
                     </Card>
-                </Col>
+                </Col> */}
 
             </Row>
         </Container>

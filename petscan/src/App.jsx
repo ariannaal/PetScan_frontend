@@ -16,6 +16,7 @@ import AddPet from './components/AddPet';
 import Pets from './components/Pets';
 import PetsBloodTests from './components/PetsBloodTests';
 import SelectedBloodTestResults from './components/SelectedBloodTestResults';
+import UpdatePet from './components/UpdatePet';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/pets" element={<Pets />} />
           <Route path="/bloodTests/:petId" element={<PetsBloodTests />} />
           <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
+          <Route path="/pets/:petId" element={<UpdatePet />} />
         </Routes>
 
       </BrowserRouter>

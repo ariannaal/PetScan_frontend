@@ -39,6 +39,7 @@ const PetsBloodTests = () => {
 
     const handleTestClick = (bloodTestId) => {
         navigate(`/bloodTest/results/${bloodTestId}`, { state: { petName: petName } });
+
     };
 
     return (

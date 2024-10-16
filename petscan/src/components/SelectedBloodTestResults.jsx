@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { Row, Col, Modal } from 'react-bootstrap';
+import { Row, Col, Modal, Spinner } from 'react-bootstrap';
 import DownloadPDF from './DownloadPDF';
 
 const SelectedBloodTestResults = () => {
@@ -19,6 +19,7 @@ const SelectedBloodTestResults = () => {
     const [selectedCondition, setSelectedCondition] = useState(null);
     const [testNumber, setTestNumber] = useState('');
     const [dateOfTest, setDateOfTest] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const handleClose = () => setShow(false);
 
@@ -30,6 +31,7 @@ const SelectedBloodTestResults = () => {
 
     useEffect(() => {
         const fetchResults = async () => {
+            setLoading(true);
             try {
                 const response = await fetch(`http://localhost:3001/results/${bloodTestId}/values`, {
                     method: 'GET',
@@ -66,6 +68,8 @@ const SelectedBloodTestResults = () => {
                 }
             } catch (error) {
                 console.error('Errore durante il recupero dei risultati:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -99,99 +103,107 @@ const SelectedBloodTestResults = () => {
 
     return (
         <div className="values-container container">
-            <h1 className="text-center mt-5 mb-5 login-title">Risultato dell&apos;esame di {petName}</h1>
-            <p><strong>Numero dell&apos;esame:</strong> {testNumber}</p>
-            <p><strong>Data dell&apos;esame:</strong> {dateOfTest}</p>
+            <h1 className="text-center mt-5 mb-5 login-title">Risultati dell&apos;esame nr. {testNumber} di {petName}</h1>
 
+            {loading ? (
+                <div className="d-flex justify-content-center">
+                    <Spinner animation="border" className="spinner" />
+                </div>
+            ) : (
+                <>
+                    <p><strong>Numero dell&apos;esame:</strong> {testNumber}</p>
+                    <p><strong>Data dell&apos;esame:</strong> {dateOfTest}</p>
 
-            <Row className="mt-5">
-                <Col xs={6} className='no-scroll'>
-                    <Row className="mb-3">
-                        <Col xs={6} className="title-result">Parametro</Col>
-                        <Col xs={6} className="title-result">Valore</Col>
-                    </Row>
+                    <Row className="mt-5">
+                        <Col xs={6} className='no-scroll'>
+                            <Row className="mb-3">
+                                <Col xs={6} className="title-result">Parametro</Col>
+                                <Col xs={6} className="title-result">Valore</Col>
+                            </Row>
 
-                    <div className="scrollable-container">
-                        {Array.isArray(results) && results.length > 0 ? (
-                            results.map((result, index) => (
-                                <Row key={index} className="align-items-center mb-4">
-                                    <Col xs={6} className="text-result">
-                                        <span className="fw-bold">{capitalizeAndSpace(result.valueName) || 'N/A'}</span>
-                                    </Col>
-                                    <Col xs={6} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
-                                </Row>
-                            ))
-                        ) : (
-                            <div>Nessun risultato disponibile.</div>
-                        )}
-                    </div>
-                </Col>
-
-                <Col xs={6} className='no-scroll'>
-                    <Row className="mb-4">
-                        <Col className="ps-5">
-                            <div className="d-flex justify-content-between">
-                                <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
-                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} petName={petName} petType={petType} age={age} gender={gender} breed={breed} dateOfTest={dateOfTest} testNumber={testNumber} />
+                            <div className="scrollable-container">
+                                {Array.isArray(results) && results.length > 0 ? (
+                                    results.map((result, index) => (
+                                        <Row key={index} className="align-items-center mb-4">
+                                            <Col xs={6} className="text-result">
+                                                <span className="fw-bold">{capitalizeAndSpace(result.valueName) || 'N/A'}</span>
+                                            </Col>
+                                            <Col xs={6} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
+                                        </Row>
+                                    ))
+                                ) : (
+                                    <div>Nessun risultato disponibile.</div>
+                                )}
                             </div>
+                        </Col>
 
-                            {(() => {
-                                const uniqueConditions = new Set();
+                        <Col xs={6} className='no-scroll'>
+                            <Row className="mb-4">
+                                <Col className="ps-5">
+                                    <div className="d-flex justify-content-between">
+                                        <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
+                                        <DownloadPDF results={results} ownerName={ownerName} surname={surname} petName={petName} petType={petType} age={age} gender={gender} breed={breed} dateOfTest={dateOfTest} testNumber={testNumber} />
+                                    </div>
 
-                                return results.map(result => {
-                                    const conditions = result.pathologicalConditions;
+                                    {(() => {
+                                        const uniqueConditions = new Set();
 
-                                    return conditions.map(condition => {
-                                        const conditionName = condition.name;
+                                        return results.map(result => {
+                                            const conditions = result.pathologicalConditions;
 
-                                        if (!uniqueConditions.has(conditionName)) {
-                                            uniqueConditions.add(conditionName);
-                                            return (
-                                                <div key={condition.id} className="div-disease">
-                                                    <div
-                                                        className="text-result disease-link"
-                                                        onClick={() => handleShow(condition)}
-                                                    >
-                                                        {conditionName.charAt(0).toUpperCase() + conditionName.slice(1)}
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    }).filter(Boolean);
-                                }).flat();
-                            })()}
+                                            return conditions.map(condition => {
+                                                const conditionName = condition.name;
 
-                            {results.every(result => result.pathologicalConditions.length === 0) && (
-                                <p>Nessuna condizione patologica trovata.</p>
-                            )}
+                                                if (!uniqueConditions.has(conditionName)) {
+                                                    uniqueConditions.add(conditionName);
+                                                    return (
+                                                        <div key={condition.id} className="div-disease">
+                                                            <div
+                                                                className="text-result disease-link"
+                                                                onClick={() => handleShow(condition)}
+                                                            >
+                                                                {conditionName.charAt(0).toUpperCase() + conditionName.slice(1)}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            }).filter(Boolean);
+                                        }).flat();
+                                    })()}
+
+                                    {results.every(result => result.pathologicalConditions.length === 0) && (
+                                        <p>Nessuna condizione patologica trovata.</p>
+                                    )}
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
-                </Col>
-            </Row>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton className="disease-title">
-                    <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {selectedCondition ? (
-                        <>
-                            <p>{selectedCondition.description || "Descrizione non disponibile."}</p>
-                            <h6 className="disease-title fs-5">Sintomi:</h6>
-                            {symptoms.length > 0 ? (
-                                <ul>
-                                    {symptoms.map((symptom, index) => (
-                                        <li className="disease-symptoms" key={index}>{symptom}</li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p>Nessun sintomo disponibile.</p>
-                            )}
-                        </>
-                    ) : null}
-                </Modal.Body>
-            </Modal>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton className="disease-title">
+                            <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {selectedCondition ? (
+                                <>
+                                    <p>{selectedCondition.description || "Descrizione non disponibile."}</p>
+                                    <h6 className="disease-title fs-5">Sintomi:</h6>
+                                    {symptoms.length > 0 ? (
+                                        <ul>
+                                            {symptoms.map((symptom, index) => (
+                                                <li className="disease-symptoms" key={index}>{symptom}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p>Nessun sintomo disponibile.</p>
+                                    )}
+                                </>
+                            ) : null}
+                        </Modal.Body>
+                    </Modal>
+                </>
+            )}
         </div>
     );
 };

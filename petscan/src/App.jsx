@@ -41,6 +41,7 @@ function App() {
           <Route path="/bloodTests/:petId" element={<PetsBloodTests />} />
           <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
           <Route path="/pets/:petId" element={<UpdatePet />} />
+
         </Routes>
 
       </BrowserRouter>

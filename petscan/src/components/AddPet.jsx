@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import pawPrints from '../assets/images/paws-prints.png';
 
 const AddPet = () => {
     const [name, setName] = useState('');
@@ -16,6 +17,13 @@ const AddPet = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const accessToken = localStorage.getItem("accessToken");
+
+        if (!accessToken) {
+            setErrorMessage("Effettua il login o registrati per aggiungere un nuovo animale.");
+            return;
+        }
 
         const newPet = {
             name: name,
@@ -33,7 +41,7 @@ const AddPet = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+                    'Authorization': `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify(newPet),
             });
@@ -170,6 +178,12 @@ const AddPet = () => {
                     </Button>
                 </div>
             </Form>
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paw-prints"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
         </div>
     );
 };

@@ -10,12 +10,20 @@ const Pets = () => {
 
 
     useEffect(() => {
+
+        const accessToken = localStorage.getItem("accessToken");
+
+        if (!accessToken) {
+            setErrorMessage("Effettua il login per visualizzare i tuoi animali.");
+            return;
+        }
+
         const fetchPets = async () => {
             try {
                 const response = await fetch('http://localhost:3001/pets', {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+                        'Authorization': `Bearer ${accessToken}`,
                         'Content-Type': 'application/json'
                     },
                 });

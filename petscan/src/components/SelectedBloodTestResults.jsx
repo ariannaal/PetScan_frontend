@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { Row, Col, Modal, Spinner } from 'react-bootstrap';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Row, Col, Modal, Spinner, Button } from 'react-bootstrap';
 import DownloadPDF from './DownloadPDF';
+import MyChart from './MyChart';
+
 
 const SelectedBloodTestResults = () => {
     const { bloodTestId } = useParams();
@@ -20,6 +22,7 @@ const SelectedBloodTestResults = () => {
     const [testNumber, setTestNumber] = useState('');
     const [dateOfTest, setDateOfTest] = useState('');
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
 
@@ -101,6 +104,8 @@ const SelectedBloodTestResults = () => {
         return value.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
     };
 
+
+
     return (
         <div className="values-container container">
             <h1 className="text-center mt-5 mb-5 login-title">Risultati dell&apos;esame nr. {testNumber} di {petName}</h1>
@@ -115,7 +120,7 @@ const SelectedBloodTestResults = () => {
                     <p><strong>Data dell&apos;esame:</strong> {dateOfTest}</p>
 
                     <Row className="mt-5">
-                        <Col xs={6} className='no-scroll'>
+                        <Col xs={12} md={6} className='no-scroll mb-4'>
                             <Row className="mb-3">
                                 <Col xs={6} className="title-result">Parametro</Col>
                                 <Col xs={6} className="title-result">Valore</Col>
@@ -125,10 +130,11 @@ const SelectedBloodTestResults = () => {
                                 {Array.isArray(results) && results.length > 0 ? (
                                     results.map((result, index) => (
                                         <Row key={index} className="align-items-center mb-4">
-                                            <Col xs={6} className="text-result">
+                                            <Col xs={4} className="text-result">
                                                 <span className="fw-bold">{capitalizeAndSpace(result.valueName) || 'N/A'}</span>
                                             </Col>
-                                            <Col xs={6} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
+                                            <Col xs={4} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
+                                            <Col xs={4} className="mt-2"> <MyChart minValue={result.minValue} maxValue={result.maxValue} currentValue={result.value} /></Col>
                                         </Row>
                                     ))
                                 ) : (
@@ -137,7 +143,7 @@ const SelectedBloodTestResults = () => {
                             </div>
                         </Col>
 
-                        <Col xs={6} className='no-scroll'>
+                        <Col xs={12} md={6} className='no-scroll'>
                             <Row className="mb-4">
                                 <Col className="ps-5">
                                     <div className="d-flex justify-content-between">
@@ -180,6 +186,9 @@ const SelectedBloodTestResults = () => {
                         </Col>
                     </Row>
 
+                    <div className="text-center mt-5 pathologies">
+                        <Button onClick={() => navigate('/options')} className='button-login menu-button rounded-pill px-4'>Torna al menù</Button>
+                    </div>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton className="disease-title">
                             <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>
@@ -202,10 +211,17 @@ const SelectedBloodTestResults = () => {
                             ) : null}
                         </Modal.Body>
                     </Modal>
+
+
+
+
                 </>
             )}
         </div>
     );
 };
+
+
+
 
 export default SelectedBloodTestResults;

@@ -25,6 +25,11 @@ const BloodTestInfo = () => {
 
             const accessToken = localStorage.getItem('accessToken');
 
+            if (!accessToken) {
+                setErrorMessage("Effettua il login o registrati per aggiungere un esame del sangue.");
+                return;
+            }
+
             const response = await fetch(`http://localhost:3001/pets`, {
                 headers: {
                     'Content-Type': 'application/json',

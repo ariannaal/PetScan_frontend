@@ -1,9 +1,10 @@
 
 import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Col, Row, Button } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import DownloadPDF from "./DownloadPDF";
 import { Modal } from "react-bootstrap";
+import MyChart from "./MyChart";
 
 
 const Values = () => {
@@ -22,6 +23,7 @@ const Values = () => {
 
     const [show, setShow] = useState(false);
     const [selectedCondition, setSelectedCondition] = useState(null);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
 
@@ -105,8 +107,8 @@ const Values = () => {
         <div className="values-container container">
             <h1 className="text-center mt-5 mb-5 login-title">Risultati degli esami</h1>
 
-            <Row>
-                <Col xs={6} className='no-scroll'>
+            <Row className="mt-5">
+                <Col xs={12} md={6} className='no-scroll mb-4'>
                     <Row className="mb-3">
                         <Col xs={6} className="title-result">Parametro</Col>
                         <Col xs={6} className="title-result">Valore</Col>
@@ -116,10 +118,11 @@ const Values = () => {
                         {Array.isArray(results) && results.length > 0 ? (
                             results.map((result, index) => (
                                 <Row key={index} className="align-items-center mb-4">
-                                    <Col xs={6} className="text-result">
+                                    <Col xs={4} className="text-result">
                                         <span className="fw-bold">{capitalizeAndSpace(result.valueName) || 'N/A'}</span>
                                     </Col>
-                                    <Col xs={6} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
+                                    <Col xs={4} className="text-result">{result.value} <span className="ms-2">({result.unit})</span></Col>
+                                    <Col xs={4} className="mt-2"> <MyChart minValue={result.minValue} maxValue={result.maxValue} currentValue={result.value} /></Col>
                                 </Row>
                             ))
                         ) : (
@@ -128,12 +131,12 @@ const Values = () => {
                     </div>
                 </Col>
 
-                <Col xs={6} className='no-scroll'>
+                <Col xs={12} md={6} className='no-scroll'>
                     <Row className="mb-4">
                         <Col className="ps-5">
                             <div className="d-flex justify-content-between">
                                 <h5 className="title-result mb-4 mt-2">Possibile quadro patologico</h5>
-                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} testNumber={testNumber} dateOfTest={dateOfTest} petName={petName} gender={gender} breed={breed} age={age} petType={petType} />
+                                <DownloadPDF results={results} ownerName={ownerName} surname={surname} petName={petName} petType={petType} age={age} gender={gender} breed={breed} dateOfTest={dateOfTest} testNumber={testNumber} />
                             </div>
 
                             {(() => {
@@ -170,6 +173,10 @@ const Values = () => {
                     </Row>
                 </Col>
             </Row>
+
+            <div className="text-center mt-5">
+                <Button onClick={() => navigate('/options')} className='button-login rounded-pill px-4'>Torna al menù</Button>
+            </div>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton className="disease-title">

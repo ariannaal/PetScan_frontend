@@ -16,9 +16,9 @@ const Home = () => {
                 />
                 <div className="row content g-0 ">
                     <div className="col-12 col-md-6 text-white">
-                        <div className="hello-human gluten-font">HELLO <br /> HUMAN</div>
+                        <div className="hello-human gluten-font">CIAO <br /> UMANO</div>
                         <div>
-                            Login or Sign Up by <Link to="/auth/login" className="text-link">clicking here</Link>
+                            Effettua il login o registrati <Link to="/auth/login" className="text-link">cliccando qui</Link>
                         </div>
                     </div>
                     <div className="col-12 col-md-6">

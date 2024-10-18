@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import pawPrints from '../assets/images/paws-prints.png';
 
 const BloodTestInfo = () => {
 
@@ -96,9 +97,16 @@ const BloodTestInfo = () => {
 
     return (
         <>
-            <div className="form-container d-flex flex-column align-items-center justify-content-center">
+            <div className="form-container d-flex flex-column align-items-center justify-content-center div-bloodtest">
 
                 <h1 className="text-center my-5 login-title">Registra un esame del sangue <span className="underline"></span></h1>
+
+                <img
+                    src={pawPrints}
+                    alt="prints"
+                    className="position-absolute  img-fluid paws-bloodtest-2"
+                    style={{ width: '650px', height: 'auto', zIndex: 0 }}
+                />
 
                 <Form onSubmit={handleSubmit} className="w-25">
                     <Form.Group controlId="dateOfTest">
@@ -179,6 +187,12 @@ const BloodTestInfo = () => {
                         </Button>
                     </div>
                 </Form>
+                <img
+                    src={pawPrints}
+                    alt="prints"
+                    className="position-absolute  img-fluid paw-prints"
+                    style={{ width: '650px', height: 'auto', zIndex: 0 }}
+                />
             </div>
         </>
 

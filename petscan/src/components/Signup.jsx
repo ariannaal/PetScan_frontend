@@ -1,10 +1,10 @@
 import { Button, Col, Form, InputGroup, Row, Dropdown, DropdownButton } from 'react-bootstrap';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Signup = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -12,6 +12,8 @@ const Signup = () => {
     const [birthDate, setBirthDate] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const handleSignup = async () => {
 
@@ -38,12 +40,19 @@ const Signup = () => {
 
             });
             if (!response.ok) {
-                throw new Error('Registrazione fallita');
+                if (response.status === 409) {
+                    throw new Error('Email già in uso');
+                } else {
+                    throw new Error('Registrazione fallita');
+                }
             }
+
             const data = await response.json();
             console.log('Registazione avvenuta con successo: ', data);
+            navigate('/options');
         } catch (error) {
             console.error('Errore nella registrazione: ', error);
+            setErrorMessage(error.message);
         }
     };
 
@@ -136,10 +145,14 @@ const Signup = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </InputGroup>
-
+                                {errorMessage && (
+                                    <p className="error-message">
+                                        <span role="img" aria-label="warning">❗️</span> {errorMessage}
+                                    </p>
+                                )}
                             </div>
 
-                            <Button className='button-login mt-5 rounded-pill px-4' onClick={handleSignup}>Registrati</Button>
+                            <Button className='button-login mt-5 rounded-pill px-4' onClick={handleSignup} navigate={'/options'}>Registrati</Button>
 
                         </div>
 

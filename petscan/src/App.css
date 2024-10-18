@@ -357,24 +357,87 @@
   left: 70%;
 }
 
+.about-us {
+  color: #04A7C8 !important;
+}
+
+.paws-about-us {
+  z-index: -1;
+}
+
+.card-about-us {
+  z-index: 1;
+}
+
+.paws-about-us-2 {
+  z-index: -1;
+  top: 30px;
+  opacity: 0.2;
+}
+
+.paws-bloodtest-2 {
+  z-index: -1;
+  top: 50px;
+  left: 0;
+  opacity: 0.2;
+}
+
+/* footer */
 
 
+.footer {
+  background-color: rgba(4, 167, 200, 0.2);
+  color: #04A7C8;
+  padding: 20px 0;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
+.footer h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
 
+.footer .social-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
+.footer .social-icons a {
+  color: #04A7C8;
+  margin: 0 16px;
+  text-decoration: none;
+}
 
+.footer .copy {
+  font-size: 14px;
+  text-align: center;
+}
 
+.container-options {
+  height: 100%;
+}
 
+.div-bloodtest {
+  min-height: 91vh;
+}
+
+.div-exams {
+  min-height: 100vh;
+}
 
 
 /* Responsività */
 
-/* @media (min-width: 768px) and (max-width: 1090px) {
+@media (min-width: 768px) and (max-width: 1120px) {
   .cat-image {
-    width: 20rem;
-    top: 50%;
+    width: 24rem;
+    margin-top: 20rem;
   }
-} */
+}
 
 @media (max-width: 768px) {
   .cat-image {

@@ -97,7 +97,7 @@ const UpdatePet = () => {
 
 
     return (
-        <div className="form-container d-flex flex-column align-items-center justify-content-center">
+        <div className="form-container d-flex flex-column align-items-center  div-exams">
             <h1 className="text-center my-5 login-title">
                 Modifica i dati di {petName} <span className="underline"></span>
             </h1>

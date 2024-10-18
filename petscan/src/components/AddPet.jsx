@@ -173,7 +173,7 @@ const AddPet = () => {
 
 
                 <div className="d-flex justify-content-center">
-                    <Button className='button-login rounded-pill px-4' type="submit">
+                    <Button className='button-login mb-5 rounded-pill px-4' type="submit">
                         Registra animale
                     </Button>
                 </div>

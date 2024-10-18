@@ -43,7 +43,7 @@ const PetsBloodTests = () => {
     };
 
     return (
-        <div className="form-container d-flex flex-column align-items-center justify-content-center">
+        <div className="form-container d-flex flex-column align-items-center  div-exams">
             <h1 className="text-center my-5 login-title">
                 Esami del sangue di {petName}
             </h1>

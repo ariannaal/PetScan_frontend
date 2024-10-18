@@ -17,33 +17,36 @@ import Pets from './components/Pets';
 import PetsBloodTests from './components/PetsBloodTests';
 import SelectedBloodTestResults from './components/SelectedBloodTestResults';
 import UpdatePet from './components/UpdatePet';
+import AboutUs from './components/AboutUs';
+import MyFooter from './components/MyFooter';
 
 
 function App() {
 
+
   return (
     <>
       <BrowserRouter>
-
-        <MyNavbar className="text-center" />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Signup />} />
-          <Route path="/bloodTests" element={<BloodTestInfo />} />
-          <Route path="/results" element={<BloodTest />} />
-          <Route path="/results/:bloodTestId/values" element={<Values />} />
-          <Route path="/disease/:diseaseId" element={<Disease />} />
-          <Route path="/options" element={<UserOptions
-          />} />
-          <Route path="/add-pet" element={<AddPet />} />
-          <Route path="/pets" element={<Pets />} />
-          <Route path="/bloodTests/:petId" element={<PetsBloodTests />} />
-          <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
-          <Route path="/pets/:petId" element={<UpdatePet />} />
-
-        </Routes>
-
+        <div>
+          <MyNavbar className="text-center" />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/register" element={<Signup />} />
+            <Route path="/bloodTests" element={<BloodTestInfo />} />
+            <Route path="/results" element={<BloodTest />} />
+            <Route path="/results/:bloodTestId/values" element={<Values />} />
+            <Route path="/disease/:diseaseId" element={<Disease />} />
+            <Route path="/options" element={<UserOptions />} />
+            <Route path="/add-pet" element={<AddPet />} />
+            <Route path="/pets" element={<Pets />} />
+            <Route path="/bloodTests/:petId" element={<PetsBloodTests />} />
+            <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
+            <Route path="/pets/:petId" element={<UpdatePet />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+          </Routes>
+          <MyFooter />
+        </div>
       </BrowserRouter>
     </>
   )

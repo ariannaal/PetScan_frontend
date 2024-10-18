@@ -15,7 +15,7 @@ const MyNavbar = () => {
 
     return (
 
-        <Navbar className="navbar-color position-sticky" expand="lg">
+        <Navbar className="navbar-color position-sticky sticky-top" expand="lg">
             <div className="container-fluid">
                 <Link className="text-white gluten-font" to="/">
                     <img
@@ -35,7 +35,7 @@ const MyNavbar = () => {
                 <Navbar.Collapse id="navbarNav">
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} to="/" className="nav-link active nunito-font text-white" aria-current="page">HOME</Nav.Link>
-                        <Nav.Link as={Link} to="/" className="nav-link nunito-font text-white">CHI SIAMO</Nav.Link>
+                        <Nav.Link as={Link} to="/aboutUs" className="nav-link nunito-font text-white">CHI SIAMO</Nav.Link>
                         <Nav.Link as={Link} to="/options" className="nav-link nunito-font text-white">MENU</Nav.Link>
                         <Nav.Link as={Link} to="/bloodTests" className="nav-link nunito-font text-white">ANALISI DEL SANGUE</Nav.Link>
                         <NavLink className="nav-item dropdown me-1">
@@ -60,7 +60,7 @@ const MyNavbar = () => {
                                     <hr className="dropdown-divider" />
                                 </NavLink>
                                 <NavLink>
-                                    <Link className="dropdown-item" href="#" onClick={handleLogout}>Log out</Link>
+                                    <Link className="dropdown-item" as={Link} to="/" onClick={handleLogout}>Log out</Link>
                                 </NavLink>
                             </ul>
                         </NavLink>

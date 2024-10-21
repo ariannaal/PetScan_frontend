@@ -29,7 +29,6 @@ const Disease = () => {
                 }
 
                 const data = await response.json();
-                console.log("Sintomi:", data);
 
                 if (Array.isArray(data)) {
                     setSymptoms(data);

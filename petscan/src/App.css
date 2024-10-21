@@ -375,7 +375,8 @@
   opacity: 0.2;
 }
 
-.paws-bloodtest-2 {
+.paws-bloodtest-2,
+.paws-account-2 {
   z-index: -1;
   top: 50px;
   left: 0;
@@ -428,6 +429,12 @@
 .div-exams {
   min-height: 100vh;
 }
+
+.account-container {
+  height: 80vh;
+}
+
+
 
 
 /* responsività */

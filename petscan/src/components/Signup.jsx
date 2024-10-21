@@ -13,7 +13,6 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(true);
 
     const handleSignup = async () => {
 
@@ -26,7 +25,6 @@ const Signup = () => {
             password,
         }
 
-        console.log(model);
 
         try {
             const response = await fetch('http://localhost:3001/auth/register', {

@@ -57,6 +57,9 @@ const MyNavbar = () => {
                                     <Link className="dropdown-item" as={Link} to="/auth/register">Signup</Link>
                                 </NavLink>
                                 <NavLink>
+                                    <Link className="dropdown-item" as={Link} to="/owners/me">Il mio account</Link>
+                                </NavLink>
+                                <NavLink>
                                     <hr className="dropdown-divider" />
                                 </NavLink>
                                 <NavLink>

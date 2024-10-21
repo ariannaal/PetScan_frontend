@@ -51,7 +51,6 @@ const AddPet = () => {
             }
 
             const petInfo = await response.json();
-            console.log("Nuovo animale registrato:", petInfo)
 
 
             if (picture) {

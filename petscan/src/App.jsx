@@ -19,6 +19,8 @@ import SelectedBloodTestResults from './components/SelectedBloodTestResults';
 import UpdatePet from './components/UpdatePet';
 import AboutUs from './components/AboutUs';
 import MyFooter from './components/MyFooter';
+import Account from './components/Account';
+import AccountEdit from './components/AccountEdit';
 
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
             <Route path="/bloodTest/results/:bloodTestId" element={<SelectedBloodTestResults />} />
             <Route path="/pets/:petId" element={<UpdatePet />} />
             <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/owners/me" element={<Account />} />
+            <Route path="/account/edit" element={<AccountEdit />} />
           </Routes>
           <MyFooter />
         </div>

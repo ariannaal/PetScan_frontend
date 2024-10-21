@@ -44,7 +44,6 @@ const BloodTestInfo = () => {
             }
 
             const data = await response.json();
-            console.log('Animali trovati:', data);
             setPets(data);
 
 
@@ -76,8 +75,6 @@ const BloodTestInfo = () => {
             });
 
             const data = await response.json();
-            console.log("Dati dell'esame del sangue:", data);
-
             const bloodTestId = data.id;
 
             navigate(`/results?bloodTestId=${bloodTestId}`);
@@ -86,10 +83,7 @@ const BloodTestInfo = () => {
                 throw new Error('Errore nell\'inserimento del test del sangue');
             }
 
-            console.log('Esame del sangue inserito con successo');
-
         } catch (error) {
-            console.log(bloodTest)
             console.error('Errore durante l\'invio del test del sangue:', error);
             setErrorMessage('Errore durante l\'inserimento del test');
         }
@@ -182,7 +176,7 @@ const BloodTestInfo = () => {
                     )}
 
                     <div className="d-flex justify-content-center">
-                        <Button className='button-login mb-5 rounded-pill px-4' type="submit">
+                        <Button className='button-login my-5 rounded-pill px-4' type="submit">
                             Invia
                         </Button>
                     </div>

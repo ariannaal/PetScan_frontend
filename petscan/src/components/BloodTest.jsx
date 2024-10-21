@@ -62,7 +62,6 @@ const BloodTest = () => {
                 results: resultsToSend
             };
 
-            console.log("Dati inviati", body);
 
             const resultsResponse = await fetch(`http://localhost:3001/results`, {
                 method: 'POST',

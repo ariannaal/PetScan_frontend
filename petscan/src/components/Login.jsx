@@ -18,8 +18,6 @@ const Login = () => {
             password,
         };
 
-        console.log(model);
-
         try {
             const response = await fetch('http://localhost:3001/auth/login', {
                 method: 'POST',

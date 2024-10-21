@@ -99,7 +99,7 @@ const BloodTestInfo = () => {
         <>
             <div className="form-container d-flex flex-column align-items-center justify-content-center div-bloodtest">
 
-                <h1 className="text-center my-5 login-title">Registra un esame del sangue <span className="underline"></span></h1>
+                <h1 className="text-center my-5 login-title test-title">Registra un esame del sangue <span className="underline"></span></h1>
 
                 <img
                     src={pawPrints}
@@ -108,7 +108,7 @@ const BloodTestInfo = () => {
                     style={{ width: '650px', height: 'auto', zIndex: 0 }}
                 />
 
-                <Form onSubmit={handleSubmit} className="w-25">
+                <Form onSubmit={handleSubmit} className="col-lg-3 col-md-6 col-sm-12">
                     <Form.Group controlId="dateOfTest">
                         <Form.Label>Data dell&apos;esame</Form.Label>
                         <Form.Control
@@ -182,7 +182,7 @@ const BloodTestInfo = () => {
                     )}
 
                     <div className="d-flex justify-content-center">
-                        <Button className='button-login mt-5 rounded-pill px-4' type="submit">
+                        <Button className='button-login mb-5 rounded-pill px-4' type="submit">
                             Invia
                         </Button>
                     </div>

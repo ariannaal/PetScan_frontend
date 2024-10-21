@@ -47,7 +47,7 @@ const Pets = () => {
 
     return (
         <div className="form-container d-flex flex-column align-items-center justify-content-center">
-            <h1 className="text-center my-5 login-title">
+            <h1 className="text-center my-5 login-title test-title">
                 I tuoi animali <span className="underline"></span>
             </h1>
 
@@ -71,13 +71,14 @@ const Pets = () => {
                                 className="rounded"
                             />
                         )}
-                        <div className='ms-4'>
+                        <div className='ms-4 text-pets'>
                             <h3 className='pet-name pb-2'> {pet.name}</h3>
                             <p><strong>Specie:</strong> {pet.petType === 'CAT' ? 'Gatto' : pet.petType === 'DOG' ? 'Cane' : pet.petType}</p>
                             <p><strong>Razza:</strong> {pet.breed}</p>
                             <p><strong>Genere:</strong> {pet.gender === 'MALE' ? 'Maschio' : pet.gender === 'FEMALE' ? 'Femmina' : pet.gender}</p>
                             <p><strong>Età:</strong> {pet.age}</p>
-                            <p><strong>Data di Nascita:</strong> {pet.dateOfBirth}</p><div className='d-flex align-column'>
+                            <p><strong>Data di Nascita:</strong> {pet.dateOfBirth}</p>
+                            <div className='d-flex align-column buttons-pets'>
                                 <Button className='button-login mt-5 rounded-pill px-4 ms-3' onClick={() => navigate(`/bloodTests/${pet.id}`, { state: { petName: pet.name } })}>Visualizza gli esami di {pet.name}</Button>
                                 <Button className='button-login mt-5 rounded-pill px-4 ms-3' onClick={() => navigate(`/pets/${pet.id}`, { state: { petName: pet.name } })}>Modifica i dati di {pet.name} </Button>
                             </div>

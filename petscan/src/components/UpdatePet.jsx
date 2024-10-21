@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, Spinner } from 'react-bootstrap';
+import pawPrints from '../assets/images/paws-prints.png';
 
 const UpdatePet = () => {
     const { petId } = useParams();
@@ -98,7 +99,7 @@ const UpdatePet = () => {
 
     return (
         <div className="form-container d-flex flex-column align-items-center  div-exams">
-            <h1 className="text-center my-5 login-title">
+            <h1 className="text-center my-5 login-title test-title">
                 Modifica i dati di {petName} <span className="underline"></span>
             </h1>
 
@@ -162,6 +163,12 @@ const UpdatePet = () => {
                     </Form>
                 )
             )}
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paw-prints"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
         </div>
     );
 };

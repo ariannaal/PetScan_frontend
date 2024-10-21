@@ -110,8 +110,8 @@ const Values = () => {
             <Row className="mt-5">
                 <Col xs={12} md={6} className='no-scroll mb-4'>
                     <Row className="mb-3">
-                        <Col xs={6} className="title-result">Parametro</Col>
-                        <Col xs={6} className="title-result">Valore</Col>
+                        <Col xs={4} className="title-result">Parametro</Col>
+                        <Col xs={4} className="title-result">Valore</Col>
                     </Row>
 
                     <div className="scrollable-container">
@@ -174,8 +174,8 @@ const Values = () => {
                 </Col>
             </Row>
 
-            <div className="text-center mt-5">
-                <Button onClick={() => navigate('/options')} className='button-login rounded-pill px-4'>Torna al menù</Button>
+            <div className="text-center my-5">
+                <Button onClick={() => navigate('/options')} className='button-login rounded-pill my-5 px-4'>Torna al menu</Button>
             </div>
 
             <Modal show={show} onHide={handleClose}>

@@ -108,7 +108,7 @@ const SelectedBloodTestResults = () => {
 
     return (
         <div className="values-container container">
-            <h1 className="text-center mt-5 mb-5 login-title">Risultati dell&apos;esame nr. {testNumber} di {petName}</h1>
+            <h1 className="text-center mt-5 mb-5 login-title test-title">Risultati dell&apos;esame nr. {testNumber} di {petName}</h1>
 
             {loading ? (
                 <div className="d-flex justify-content-center">
@@ -186,9 +186,11 @@ const SelectedBloodTestResults = () => {
                         </Col>
                     </Row>
 
-                    <div className="text-center mt-4 pathologies">
-                        <Button onClick={() => navigate('/options')} className='button-login mb-5 menu-button rounded-pill px-4'>Torna al menu</Button>
+                    <div className="text-center my-5 pathologies">
+                        <Button onClick={() => navigate('/options')} className='button-login my-5 menu-button rounded-pill px-4'>Torna al menu</Button>
                     </div>
+
+
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton className="disease-title">
                             <Modal.Title>{selectedCondition ? selectedCondition.name : "Dettagli malattia"}</Modal.Title>

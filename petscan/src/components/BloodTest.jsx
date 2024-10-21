@@ -88,8 +88,8 @@ const BloodTest = () => {
     };
 
     return (
-        <div className="form-container d-flex flex-column align-items-center justify-content-center">
-            <h1 className="text-center mt-5 mb-3 login-title">Inserisci il valore per ciascun parametro <span className="underline"></span></h1>
+        <div className="form-container d-flex flex-column align-items-center justify-content-center  ">
+            <h1 className="text-center mt-5 mb-3 login-title test-title">Inserisci il valore per ciascun parametro <span className="underline"></span></h1>
             <Form onSubmit={handleSubmit} className="w-50">
                 <Row>
                     {results.map((result, index) => (
@@ -106,8 +106,8 @@ const BloodTest = () => {
                         </Col>
                     ))}
                 </Row>
-                <div className="d-flex justify-content-center">
-                    <Button type="submit" className='button-login my-4 rounded-pill px-4'>Invia i risultati</Button>
+                <div className="text-center mt-4 pathologies">
+                    <Button type="submit" className='button-login mb-5 menu-button rounded-pill px-4'>Invia i risultati</Button>
                 </div>
             </Form>
         </div>

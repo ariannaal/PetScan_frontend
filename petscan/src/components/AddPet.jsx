@@ -74,7 +74,7 @@ const AddPet = () => {
             navigate('/pets');
         } catch (error) {
             console.error('Errore:', error);
-            setErrorMessage('Registrazione fallita, riprova.');
+            setErrorMessage('Effettua il login o registrati prima di aggiungere un animale.');
         }
     };
 
@@ -82,11 +82,9 @@ const AddPet = () => {
     return (
         <div className="form-container d-flex flex-column align-items-center justify-content-center">
 
-            <h1 className="text-center mt-5 mb-5 login-title">Registra un nuovo animale <span className="underline"></span></h1>
+            <h1 className="text-center mt-4 mb-5 login-title test-title">Registra un nuovo animale <span className="underline"></span></h1>
 
-            <Form onSubmit={handleSubmit} className="w-25">
-
-
+            <Form onSubmit={handleSubmit} className="col-lg-4 col-md-6 col-sm-12">
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
                 <Form.Group className="mb-3" controlId="formPetName">
@@ -172,7 +170,7 @@ const AddPet = () => {
                 </Form.Group>
 
 
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mb-3">
                     <Button className='button-login mb-5 rounded-pill px-4' type="submit">
                         Registra animale
                     </Button>

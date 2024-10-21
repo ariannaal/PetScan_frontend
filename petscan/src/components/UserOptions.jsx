@@ -23,7 +23,7 @@ const UserOptions = () => {
                     <Row className="w-100 row-index">
                         <div className="form-container d-flex flex-column align-items-center justify-content-center my-5">
 
-                            <h1 className="text-center my-5 login-title">Cosa vuoi fare oggi? <span className="underline"></span></h1>
+                            <h1 className="text-center my-5 login-title test-title">Cosa vuoi fare oggi? <span className="underline"></span></h1>
 
                         </div>
 

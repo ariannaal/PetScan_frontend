@@ -209,11 +209,6 @@
   border-color: #04A7C8;
 }
 
-/* blood test */
-
-/* .form-blood-test-info {
-  width: 20rem;
-} */
 
 /* risultati */
 
@@ -453,6 +448,10 @@
 
 .pets-container {
   height: 75vh;
+}
+
+.account-container {
+  height: 65vh;
 }
 
 

@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import logo from '../assets/images/logo.png'
 
 const MyNavbar = () => {
 
@@ -19,7 +20,7 @@ const MyNavbar = () => {
             <div className="container-fluid">
                 <Link className="text-white gluten-font" to="/">
                     <img
-                        src="/src/assets/images/logo.png"
+                        src={logo}
                         alt="logo"
                         width="75"
                         height="75"

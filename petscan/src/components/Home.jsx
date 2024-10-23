@@ -1,4 +1,5 @@
-// import backgroundImage from './assets/images/bg1.PNG';
+import backgroundImage from '../assets/images/bg1.PNG';
+
 
 import { Link } from "react-router-dom";
 
@@ -22,11 +23,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
-                        <img
-                            src="/src/assets/images/cat_transparent.png"
-                            alt="cat"
-                            className="cat-image"
-                        />
+                        <img src={backgroundImage} alt="puppies" className='dog-picture' />
                     </div>
                 </div>
             </div>

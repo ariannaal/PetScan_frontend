@@ -24,7 +24,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
-                        <img src={cat} alt="puppies" className='dog-picture' />
+                        <img src={cat} alt="puppies" className='cat-image' />
                     </div>
                 </div>
             </div>

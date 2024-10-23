@@ -9,9 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "engines": {
-    "node": "16.x"
-  },
   "dependencies": {
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.5",

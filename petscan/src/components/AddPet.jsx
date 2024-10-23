@@ -73,7 +73,7 @@ const AddPet = () => {
             navigate('/pets');
         } catch (error) {
             console.error('Errore:', error);
-            setErrorMessage('Effettua il login o registrati prima di aggiungere un animale.');
+            setErrorMessage("Effettua il login o registrati prima di aggiungere un animale.");
         }
     };
 

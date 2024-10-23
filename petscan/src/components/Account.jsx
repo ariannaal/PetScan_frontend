@@ -56,7 +56,7 @@ const Account = () => {
                 <p><strong>Data di nascita:</strong> {owner.dateOfBirth}</p>
                 <p><strong>Genere:</strong> {owner.gender === 'FEMALE' ? 'Femmina' : 'Maschio'}</p>
                 <div className="d-flex justify-content-center mb-3">
-                    <Button className='button-login mb-5 rounded-pill px-4' onClick={() => navigate('/account/edit')}>Modifica</Button></div>
+                    <Button className='button-login mt-4 rounded-pill px-4' onClick={() => navigate('/account/edit')}>Modifica</Button></div>
             </div>
 
             <img

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 
@@ -10,6 +11,10 @@ const PetsBloodTests = () => {
     const navigate = useNavigate();
 
     const petName = state?.petName;
+
+    const handleNavigate = () => {
+        navigate('/bloodTests');
+    };
 
     useEffect(() => {
         const fetchBloodTests = async () => {
@@ -64,6 +69,10 @@ const PetsBloodTests = () => {
                     <p>Nessun esame del sangue trovato per {petName}.</p>
                 )}
             </ul>
+
+            <Button className='button-login my-3 rounded-pill px-4' onClick={handleNavigate}>
+                Aggiungi un esame del sangue
+            </Button>
         </div>
     );
 };

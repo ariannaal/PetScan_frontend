@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import pawPrints from '../assets/images/paws-prints.png';
 
 
 const BloodTest = () => {
@@ -89,7 +90,13 @@ const BloodTest = () => {
     return (
         <div className="form-container d-flex flex-column align-items-center justify-content-center  ">
             <h1 className="text-center mt-5 mb-3 login-title test-title">Inserisci il valore per ciascun parametro <span className="underline"></span></h1>
-            <Form onSubmit={handleSubmit} className="w-50">
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paws-values"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
+            <Form onSubmit={handleSubmit} className="w-50 form-values">
                 <Row>
                     {results.map((result, index) => (
                         <Col key={result.valuesNameId} xs={12} md={6} className="gy-4">
@@ -109,6 +116,12 @@ const BloodTest = () => {
                     <Button type="submit" className='button-login mb-5 menu-button rounded-pill px-4'>Invia i risultati</Button>
                 </div>
             </Form>
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paws-values-2"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
         </div>
 
     );

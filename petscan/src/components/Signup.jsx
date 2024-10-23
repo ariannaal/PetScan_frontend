@@ -47,7 +47,7 @@ const Signup = () => {
 
             const data = await response.json();
             console.log('Registazione avvenuta con successo: ', data);
-            navigate('/options');
+            navigate('/auth/login');
         } catch (error) {
             console.error('Errore nella registrazione: ', error);
             setErrorMessage(error.message);

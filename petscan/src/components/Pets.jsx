@@ -53,7 +53,7 @@ const Pets = () => {
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-            <ul className="list-unstyled">
+            <ul className="list-unstyled pets-container">
                 {pets.map((pet) => (
                     <li key={pet.id} className="pet-item d-flex align-items-center">
                         {pet.picture ? (

@@ -27,7 +27,8 @@ const BloodTestInfo = () => {
             const accessToken = localStorage.getItem('accessToken');
 
             if (!accessToken) {
-                setErrorMessage("Effettua il login o registrati per aggiungere un esame del sangue.");
+                setErrorMessage("Effettua il login o registrati per aggiungere un esame del sangue." +
+                    " Se l'hai già fatto, assicurati di registrare l'animale prima.");
                 return;
             }
 

@@ -25,6 +25,8 @@ const Login = () => {
                 headers: {
 
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+
                 },
                 body: JSON.stringify(model),
 
@@ -37,7 +39,7 @@ const Login = () => {
             const data = await response.json();
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('firstName', data.firstName);
-            navigate(`${apiUrl}/options`);
+            navigate(`/options`);
 
         } catch (error) {
             console.error('Errore nel login: ', error);

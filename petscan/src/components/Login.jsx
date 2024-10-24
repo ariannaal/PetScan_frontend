@@ -19,13 +19,15 @@ const Login = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/auth/login', {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/auth/login`, {
                 method: 'POST',
                 headers: {
 
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(model),
+
             });
 
             if (!response.ok) {
@@ -35,7 +37,7 @@ const Login = () => {
             const data = await response.json();
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('firstName', data.firstName);
-            navigate('/options');
+            navigate(`${apiUrl}/options`);
 
         } catch (error) {
             console.error('Errore nel login: ', error);

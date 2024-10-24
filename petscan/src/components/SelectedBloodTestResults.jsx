@@ -36,11 +36,12 @@ const SelectedBloodTestResults = () => {
         const fetchResults = async () => {
             setLoading(true);
             try {
+                const accessToken = localStorage.getItem('accessToken');
                 const response = await fetch(`http://localhost:3001/results/${bloodTestId}/values`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                        'Authorization': `Bearer ${accessToken}`,
                     },
                 });
 

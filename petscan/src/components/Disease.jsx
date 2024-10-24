@@ -13,12 +13,13 @@ const Disease = () => {
         const fetchSymptoms = async () => {
             setLoading(true);
             try {
+                const accessToken = localStorage.getItem('accessToken');
                 const url = `http://localhost:3001/disease/${diseaseId}`;
                 const response = await fetch(url, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                        'Authorization': `Bearer ${accessToken}`,
                     },
                 });
 

@@ -60,7 +60,7 @@ const AddPet = () => {
                 const uploadResponse = await fetch(`http://localhost:3001/pets/${petInfo.id}/picture`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+                        'Authorization': `Bearer ${accessToken}`,
                     },
                     body: formData,
                 });

@@ -379,6 +379,9 @@
 
 /* footer */
 
+.values-container {
+  min-height: 100vh !important;
+}
 
 .footer {
   background-color: rgba(4, 167, 200, 0.2);

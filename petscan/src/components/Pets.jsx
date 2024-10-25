@@ -46,7 +46,7 @@ const Pets = () => {
 
 
     return (
-        <div className="form-container d-flex flex-column align-items-center justify-content-center">
+        <div className="pets-container d-flex flex-column align-items-center justify-content-center">
             <h1 className="text-center my-5 login-title test-title">
                 I tuoi animali <span className="underline"></span>
             </h1>

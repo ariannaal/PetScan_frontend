@@ -450,7 +450,7 @@
 }
 
 .pets-container {
-  height: 75vh;
+  min-height: 200%;
 }
 
 .account-container {

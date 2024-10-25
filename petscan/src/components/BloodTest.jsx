@@ -121,7 +121,7 @@ const BloodTest = () => {
             </Form>
             {loading && (
                 <div className="loading-spinner">
-                    <Spinner animation="border" className="spinner" />
+                    <Spinner animation="border" className="spinner mb-2" />
                 </div>
             )}
             <img

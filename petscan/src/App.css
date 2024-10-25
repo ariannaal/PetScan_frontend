@@ -459,9 +459,13 @@
 
 .spinner-container {
   position: absolute;
-  top: 15px;
+  top: 10px;
   left: 50%;
   z-index: 1;
+}
+
+.position-relative {
+  position: relative;
 }
 
 

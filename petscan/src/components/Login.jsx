@@ -58,7 +58,7 @@ const Login = () => {
                     <Col md={3} lg={5} className="d-flex align-items-center justify-content-center blue-background">
                     </Col>
                     <Col md={9} lg={7} className="d-flex justify-content-center white-background">
-                        <div className="d-flex flex-column align-items-center">
+                        <div className="d-flex flex-column align-items-center position-relative">
                             <h1 className="login-title">
                                 Login
                                 <span className="underline"></span>

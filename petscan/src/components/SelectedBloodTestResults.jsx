@@ -187,7 +187,7 @@ const SelectedBloodTestResults = () => {
                     </Row>
 
                     <div className="text-center my-5 pathologies">
-                        <Button onClick={() => navigate('/options')} className='button-login my-5 menu-button rounded-pill px-4'>Torna al menu</Button>
+                        <Button onClick={() => navigate('/options')} className='button-login menu-button rounded-pill px-4'>Torna al menu</Button>
                     </div>
 
 

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import pawPrints from '../assets/images/paws-prints.png';
 
@@ -41,7 +41,7 @@ const BloodTest = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const bloodTestId = queryParams.get('bloodTestId');
-
+    const [loading, setLoading] = useState(false);
 
     const handleValueChange = (index, newValue) => {
         const updatedResults = [...results];
@@ -51,6 +51,7 @@ const BloodTest = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
 
         try {
             const resultsToSend = results.map(result => ({
@@ -84,6 +85,8 @@ const BloodTest = () => {
 
         } catch (error) {
             console.error('Errore nel salvataggio:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -116,6 +119,11 @@ const BloodTest = () => {
                     <Button type="submit" className='button-login mb-5 menu-button rounded-pill px-4'>Invia i risultati</Button>
                 </div>
             </Form>
+            {loading && (
+                <div className="loading-spinner">
+                    <Spinner animation="border" className="spinner" />
+                </div>
+            )}
             <img
                 src={pawPrints}
                 alt="prints"

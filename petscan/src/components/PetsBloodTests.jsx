@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import pawPrints from '../assets/images/paws-prints.png';
 
 const PetsBloodTests = () => {
     const { petId } = useParams();
@@ -55,6 +55,13 @@ const PetsBloodTests = () => {
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paws-bloodtest-2"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
+
             <ul className="list-unstyled">
                 {bloodTests.length > 0 ? (
                     bloodTests.map((test) => (
@@ -73,6 +80,14 @@ const PetsBloodTests = () => {
             <Button className='button-login my-3 rounded-pill px-4' onClick={handleNavigate}>
                 Aggiungi un esame del sangue
             </Button>
+
+            <img
+                src={pawPrints}
+                alt="prints"
+                className="position-absolute  img-fluid paw-prints"
+                style={{ width: '650px', height: 'auto', zIndex: 0 }}
+            />
+
         </div>
     );
 };

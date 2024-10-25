@@ -12,6 +12,7 @@ const UserOptions = () => {
     const handleNavigate = (path) => {
         setLoading(true);
         navigate(path);
+        setLoading(false);
     };
 
 
@@ -70,11 +71,13 @@ const UserOptions = () => {
                         </Col>
 
                     </Row>
+
                     {loading && (
-                        <div className="d-flex justify-content-center">
+                        <div className="d-flex justify-content-center mt-4">
                             <Spinner animation="border" className="spinner" />
                         </div>
                     )}
+
                     <img
                         src={pawPrints}
                         alt="prints"

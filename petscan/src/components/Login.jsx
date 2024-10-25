@@ -96,8 +96,8 @@ const Login = () => {
                             <Button className='button-login mt-5 rounded-pill px-4' onClick={handleLogin}>Login</Button>
 
                             {loading && (
-                                <div className="d-flex justify-content-center mt-3">
-                                    <Spinner animation="border" />
+                                <div className="spinner-container">
+                                    <Spinner animation="border" className='spinner' />
                                 </div>
                             )}
 

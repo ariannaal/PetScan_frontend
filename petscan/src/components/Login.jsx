@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import dogImage from '../assets/images/cat-dog.png';
-import { Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
+import { Row, Col, Form, InputGroup, Button, Spinner } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,12 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
+        setLoading(true);
         const model = {
             email,
             password,
@@ -45,6 +46,8 @@ const Login = () => {
         } catch (error) {
             console.error('Errore nel login: ', error);
             setErrorMessage('Credenziali errate');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -91,6 +94,13 @@ const Login = () => {
                                 )}
                             </div>
                             <Button className='button-login mt-5 rounded-pill px-4' onClick={handleLogin}>Login</Button>
+
+                            {loading && (
+                                <div className="d-flex justify-content-center mt-3">
+                                    <Spinner animation="border" />
+                                </div>
+                            )}
+
                             <div className='mt-5'>
                                 Non sei ancora registrato? <Link to="/auth/register" className='signup-link'>Registrati qui</Link>
                             </div>

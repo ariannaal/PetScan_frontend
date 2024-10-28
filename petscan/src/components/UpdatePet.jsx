@@ -17,7 +17,8 @@ const UpdatePet = () => {
         const fetchPet = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:3001/pets/${petId}`, {
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/pets/${petId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,

@@ -20,7 +20,8 @@ const Pets = () => {
 
         const fetchPets = async () => {
             try {
-                const response = await fetch('http://localhost:3001/pets', {
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`{${apiUrl}}/pets`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,

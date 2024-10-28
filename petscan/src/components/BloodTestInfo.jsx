@@ -31,8 +31,8 @@ const BloodTestInfo = () => {
                     " Se l'hai già fatto, assicurati di registrare l'animale prima.");
                 return;
             }
-
-            const response = await fetch(`http://localhost:3001/pets`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/pets`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${accessToken}`,
@@ -65,7 +65,8 @@ const BloodTestInfo = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/bloodTests', {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/bloodTests`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -14,8 +14,8 @@ const Disease = () => {
             setLoading(true);
             try {
                 const accessToken = localStorage.getItem('accessToken');
-                const url = `http://localhost:3001/disease/${diseaseId}`;
-                const response = await fetch(url, {
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/disease/${diseaseId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

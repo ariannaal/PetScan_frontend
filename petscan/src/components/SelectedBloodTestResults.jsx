@@ -37,7 +37,8 @@ const SelectedBloodTestResults = () => {
             setLoading(true);
             try {
                 const accessToken = localStorage.getItem('accessToken');
-                const response = await fetch(`http://localhost:3001/results/${bloodTestId}/values`, {
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/results/${bloodTestId}/values`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -83,7 +84,8 @@ const SelectedBloodTestResults = () => {
 
     const fetchSymptoms = async (diseaseId) => {
         try {
-            const response = await fetch(`http://localhost:3001/symptoms/disease/${diseaseId}`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/symptoms/disease/${diseaseId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

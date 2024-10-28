@@ -11,7 +11,8 @@ const Account = () => {
     useEffect(() => {
         const fetchOwner = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/owners/me`, {
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/owners/me`, {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,
                     },

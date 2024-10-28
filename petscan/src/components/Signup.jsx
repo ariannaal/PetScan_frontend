@@ -27,8 +27,9 @@ const Signup = () => {
 
 
         try {
+            const apiUrl = import.meta.env.VITE_API_URL;
             const accessToken = localStorage.getItem('accessToken');
-            const response = await fetch('http://localhost:3001/auth/register', {
+            const response = await fetch(`${apiUrl}/auth/register`, {
 
                 method: 'POST',
                 headers: {

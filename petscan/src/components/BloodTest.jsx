@@ -64,8 +64,8 @@ const BloodTest = () => {
                 results: resultsToSend
             };
 
-
-            const resultsResponse = await fetch(`http://localhost:3001/results`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const resultsResponse = await fetch(`${apiUrl}/results`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

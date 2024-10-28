@@ -21,7 +21,7 @@ const Pets = () => {
         const fetchPets = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL;
-                const response = await fetch(`{${apiUrl}}/pets`, {
+                const response = await fetch(`${apiUrl}/pets`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,

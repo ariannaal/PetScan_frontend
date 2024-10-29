@@ -7,12 +7,13 @@ const PetsBloodTests = () => {
     const { petId } = useParams();
     const [bloodTests, setBloodTests] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { state } = useLocation();
     const navigate = useNavigate();
     const petName = state?.petName;
 
     useEffect(() => {
+        setLoading(true);
         const fetchBloodTests = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL;

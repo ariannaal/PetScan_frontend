@@ -5,13 +5,13 @@ import { Button, Spinner } from 'react-bootstrap';
 
 const Pets = () => {
     const [pets, setPets] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const accessToken = localStorage.getItem("accessToken");
-
+        setLoading(true);
         if (!accessToken) {
             setErrorMessage("Effettua il login per visualizzare i tuoi animali.");
             setLoading(false);

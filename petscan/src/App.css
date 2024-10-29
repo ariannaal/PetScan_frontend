@@ -549,5 +549,8 @@
     padding-inline: 2.5rem;
   }
 
+  .height-login {
+    height: 75% !important;
+  }
 
 }

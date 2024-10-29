@@ -480,12 +480,15 @@
 
 @media (max-width: 768px) {
   .cat-image {
-    width: 25rem;
+    width: 22rem;
     top: 50%;
+    margin-top: 20px;
   }
 
   .hello-human {
     font-size: 5rem;
+    padding-left: 0px;
+    margin-top: -40px;
   }
 
   .blue-background {
@@ -541,7 +544,9 @@
     font-size: 0.9rem;
   }
 
-
+  .tests-list {
+    padding-left: 0;
+  }
 
 
 }

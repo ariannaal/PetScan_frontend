@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import pawPrints from '../assets/images/paws-prints.png';
 
@@ -7,14 +7,10 @@ const PetsBloodTests = () => {
     const { petId } = useParams();
     const [bloodTests, setBloodTests] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const { state } = useLocation();
     const navigate = useNavigate();
-
     const petName = state?.petName;
-
-    const handleNavigate = () => {
-        navigate('/bloodTests');
-    };
 
     useEffect(() => {
         const fetchBloodTests = async () => {
@@ -37,6 +33,8 @@ const PetsBloodTests = () => {
             } catch (error) {
                 console.error('Errore:', error);
                 setErrorMessage('Si è verificato un errore nel recupero degli esami del sangue.');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -45,11 +43,14 @@ const PetsBloodTests = () => {
 
     const handleTestClick = (bloodTestId) => {
         navigate(`/bloodTest/results/${bloodTestId}`, { state: { petName: petName } });
+    };
 
+    const handleNavigate = () => {
+        navigate('/bloodTests');
     };
 
     return (
-        <div className="form-container d-flex flex-column align-items-center  div-exams">
+        <div className="form-container d-flex flex-column align-items-center div-exams">
             <h1 className="text-center my-5 login-title test-title">
                 Esami del sangue di {petName}
             </h1>
@@ -59,24 +60,29 @@ const PetsBloodTests = () => {
             <img
                 src={pawPrints}
                 alt="prints"
-                className="position-absolute  img-fluid paws-bloodtest-2"
+                className="position-absolute img-fluid paws-bloodtest-2"
                 style={{ width: '650px', height: 'auto', zIndex: 0 }}
             />
 
-            <ul className="list-unstyled">
-                {bloodTests.length > 0 ? (
-                    bloodTests.map((test) => (
-                        <li key={test.id} className="pet-item d-flex align-items-space-between pt-2" onClick={() => handleTestClick(test.id)}
-                            style={{ cursor: 'pointer' }}>
-                            <p><strong>Numero dell&apos;esame:</strong> {test.testNumber}</p>
-                            <p className="ms-4"><strong>Data dell&apos;esame:</strong> {test.dateOfTest}</p>
-
-                        </li>
-                    ))
-                ) : (
-                    <p>Nessun esame del sangue trovato per {petName}.</p>
-                )}
-            </ul>
+            {loading ? (
+                <div className="spinner-container">
+                    <Spinner animation="border" className='spinner' />
+                </div>
+            ) : (
+                <ul className="list-unstyled tests-list">
+                    {bloodTests.length > 0 ? (
+                        bloodTests.map((test) => (
+                            <li key={test.id} className="pet-item d-flex align-items-space-between pt-2" onClick={() => handleTestClick(test.id)}
+                                style={{ cursor: 'pointer' }}>
+                                <p><strong>Numero dell&apos;esame:</strong> {test.testNumber}</p>
+                                <p className="ms-4"><strong>Data dell&apos;esame:</strong> {test.dateOfTest}</p>
+                            </li>
+                        ))
+                    ) : (
+                        <p>Nessun esame del sangue trovato per {petName}.</p>
+                    )}
+                </ul>
+            )}
 
             <Button className='button-login my-3 rounded-pill px-4' onClick={handleNavigate}>
                 Aggiungi un esame del sangue
@@ -85,13 +91,11 @@ const PetsBloodTests = () => {
             <img
                 src={pawPrints}
                 alt="prints"
-                className="position-absolute  img-fluid paw-prints"
+                className="position-absolute img-fluid paw-prints"
                 style={{ width: '650px', height: 'auto', zIndex: 0 }}
             />
-
         </div>
     );
 };
-
 
 export default PetsBloodTests;

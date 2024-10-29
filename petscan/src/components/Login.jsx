@@ -54,11 +54,11 @@ const Login = () => {
     return (
         <>
             <div className="login-container">
-                <Row className="h-100 height-login">
+                <Row className="h-100">
                     <Col md={3} lg={5} className="d-flex align-items-center justify-content-center blue-background">
                     </Col>
                     <Col md={9} lg={7} className="d-flex justify-content-center white-background">
-                        <div className="d-flex flex-column align-items-center position-relative">
+                        <div className="d-flex flex-column align-items-center position-relative height-login">
                             <h1 className="login-title">
                                 Login
                                 <span className="underline"></span>
